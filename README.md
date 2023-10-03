@@ -6,6 +6,8 @@ The webpage will provide weather data for five days for a user searched city.
 
 ## Screenshot
 
+![Alt text](weather-dashboard-screenshot.png)
+
 ## Deployment link:
 
 https://silverfoot42.github.io/weather-dashboard/

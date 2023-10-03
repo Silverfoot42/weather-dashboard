@@ -8,9 +8,11 @@ var windEl = document.querySelector('#wind');
 var humidityEl = document.querySelector('#humidity');
 var forecastEl = document.getElementById('forecast');
 
+// On click of the search button will load the function
 var formSubmitHandler = function (event) {
     event.preventDefault();
 
+    // Takes the city entered into the search bar and gives it to the api
     var city = cityName.value.trim();
     var geoUrl = 'http://api.openweathermap.org/geo/1.0/direct?q=' + city + '&limit=1&appid=d23d461cc1f1e5ba5d600e879f651007';
     if (city != "") {
@@ -19,6 +21,7 @@ var formSubmitHandler = function (event) {
         .then(function (response) {
           return response.json();
         })
+        // Takes the latitude and longitude of the city found using the geo api link and gives it to the weather forecast api so that it can find the specific weather of the city entered by the user.
         .then(function (data) {
             var lat = data[0].lat;
             var lon = data[0].lon;
@@ -28,6 +31,7 @@ var formSubmitHandler = function (event) {
         .then(function (response) {
             return response.json();
         })
+        // Updates the html in the main box to show whatever is in the first array of data from the api fetch request
         .then(function (data) {
             console.log(data);
             var iconCode = data.list[0].weather[0].icon;
@@ -39,6 +43,7 @@ var formSubmitHandler = function (event) {
             windEl.textContent = "Wind: " + Math.floor(data.list[0].wind.speed) + " MPH";
             humidityEl.textContent = "Humidity: " + data.list[0].main.humidity + "%";
 
+            // Creates boxes with the the current day as well as the next four days worth of weather information.
             for (i = 0; i < 5; i++) {
                 var forecastCard = document.createElement('div');
                 forecastCard.classList.add('forecast')
@@ -66,10 +71,6 @@ var formSubmitHandler = function (event) {
             console.error(error);
         });
     }
-
-}
-
-var getWeatherData = function () {
 
 }
 
