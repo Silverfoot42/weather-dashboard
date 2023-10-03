@@ -4,7 +4,16 @@
     align-items: right;
 }
 
-#forecast {
+.forecast {
     display: flex;
     flex-direction: row;
+    border: solid;
+    background-color: #0d6efd;
+    color: white;
+}
+
+img {
+    display: none;
+    height: 50px;
+    width: 50px;
 }
