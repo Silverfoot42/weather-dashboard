@@ -38,19 +38,18 @@ var formSubmitHandler = function (event) {
             tempEl.textContent = "Temp: " + Math.floor(data.list[0].main.temp) + "°";
             windEl.textContent = "Wind: " + Math.floor(data.list[0].wind.speed) + " MPH";
             humidityEl.textContent = "Humidity: " + data.list[0].main.humidity + "%";
-        })
-        .then(function (data) {
-            for (i = 1; i < 5; i++) {
+
+            for (i = 0; i < 5; i++) {
                 var forecastCard = document.createElement('div');
                 forecastCard.classList.add('forecast')
                 forecastEl.appendChild(forecastCard)
                 var date = document.createElement('p');
                 date.textContent ="Date: " + new Date(data.list[i * 9].dt_txt).toLocaleDateString('en-US');
                 forecastCard.appendChild(date);
-                var iconCode = data.list[i * 9].weather[0].icon;
-                var iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
+                var forecastIconCode = data.list[i * 9].weather[0].icon;
+                var forecastIconUrl = "http://openweathermap.org/img/w/" + forecastIconCode + ".png";
                 var icon = document.createElement('img');
-                icon.src = iconUrl;
+                icon.src = forecastIconUrl;
                 forecastCard.appendChild(icon);
                 var temperature = document.createElement('p');
                 temperature.textContent = "Temp: " + Math.floor(data.list[i * 9].main.temp) + "°";
@@ -61,7 +60,6 @@ var formSubmitHandler = function (event) {
                 var humidity = document.createElement('p');
                 humidity.textContent = "Humidity: " + data.list[i * 9].main.humidity + "%";
                 forecastCard.appendChild(humidity);
-
             }
         })
         .catch(function (error) {
